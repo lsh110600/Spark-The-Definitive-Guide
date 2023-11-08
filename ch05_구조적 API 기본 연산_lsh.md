@@ -58,8 +58,7 @@ df = spark.read.format("json").schema(myManualSchema)\
 ## 5.2 컬럼과 표현식
 * 스파크의 컬럼은 표현식을 사용해 레코드 단위로 계산한 값을 단순하게 나타내는 논리적인 구조
   * 표현식으로 컬럼을 선택, 조작, 제거 가능
-* 따라서 컬럼의 실제값을 얻으려면 로우가 필요하고,
-* 로우를 얻으려면 DataFrame이 필요하다.
+* 따라서 컬럼의 실제값을 얻으려면 로우가 필요하고, 로우를 얻으려면 DataFrame이 필요하다.
 * DataFrame을 통하지 않으면 외부에서 컬럼에 접근할 수 없다.
 * 컬럼 내용을 수정하려면 반드시 DataFrame의 스파크 트랜스포메이션을 사용해야함
 
@@ -89,7 +88,7 @@ from pyspark.sql.functions import expr
 expr("(((someCol + 5) * 200) - 6) < otherCol")
 ```
 
-* 컬럼은 단지 표현식일 뿐이다. expr("somCol")과 col("someCol")은 동일하다.
+* 컬럼은 단지 표현식일 뿐이다. expr("someCol")과 col("someCol")은 동일하다.
 * 컬럼과 컬럼의 트랜스포메이션은 파싱된 표현식과 동일한 논리적 실행 계획으로 컴파일된다. (col("someCol") - 6) < col("otherCol")과 expr("(someCol - 6) < otherCol")은 동일하다.
 
 **DataFrame 컬럼에 접근하기**
@@ -278,7 +277,9 @@ myDf.show()
   * 전체 데이터를 셔플함 
   * 향후에 파티션 수가 현재 파티션 수보다 많을 때나 
   * 컬럼을 기준으로 파티션을 만드는 경우에만 사용 
-  * coalesce 메서드로 전체 데이터를 셔플하지 않고 파티션 병합 가능
+  * coalesce 메서드로 전체 데이터를 셔플하지 않고 파티션 병합 가능hnj,b kvgjdftv
+  
+  ![img.png](img/repartition.png)
 
   ```python
     df.rdd.getNumPartitions()
